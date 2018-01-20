@@ -17,15 +17,17 @@ ctrl_x = False
 
 def handle_exit(key):
     global ctrl_x
+
+    key = key.replace('ctrl ', 'C-')
     txt.set_text(repr(key))
 
-    if 'ctrl x' == key:
+    if 'C-x' == key:
         ctrl_x = True
 
-    if ctrl_x and ('ctrl c' == key):
+    if ctrl_x and ('C-c' == key):
         raise urwid.ExitMainLoop
 
-    if 'ctrl x' not in key:
+    if 'C-x' not in key:
         ctrl_x = False
 
 
