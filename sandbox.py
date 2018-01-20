@@ -10,7 +10,11 @@ title = urwid.Text('Exit        C-x C-c')
 title = urwid.AttrMap(title, 'title')
 
 txt = urwid.Text('{key}')
-body = urwid.Filler(urwid.Columns([title, txt]), 'top')
+
+
+walker = urwid.SimpleListWalker([])
+body = urwid.ListBox(walker)
+view = urwid.Frame(body, footer=urwid.Columns([title, txt]))
 
 ctrl_x = False
 
@@ -36,8 +40,8 @@ palette = [
 ]
 
 
-#loop = urwid.MainLoop(body, palette, screen, input_filter=input_filter)  # (keys, raw)
-loop = urwid.MainLoop(body, palette, screen, unhandled_input=handle_exit)  # (key)
+#loop = urwid.MainLoop(view, palette, screen, input_filter=input_filter)  # (keys, raw)
+loop = urwid.MainLoop(view, palette, screen, unhandled_input=handle_exit)  # (key)
 
 
 try:
